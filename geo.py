@@ -3,7 +3,7 @@ import json
 import os
 import requests
 
-GEO_URL = "https://api.scratchstats.com/scratch/users/${0}"
+GEO_URL = "https://api.scratch.mit.edu/users/{0}"
 
 def get_arguments():
     parser = argparse.ArgumentParser(description="Find out user's location")
@@ -21,9 +21,9 @@ def get_location(arguments):
         raise RuntimeError("GET {0} failed with status code {1}".format(r.status_code, url))
     
     user_formatted = r.json()
-
-    print(user_formatted)
-    return user_formatted
+    country_code = user_formatted["profile"]["country"]
+    print(country_code)
+    return country_code
 
 
 def main():
